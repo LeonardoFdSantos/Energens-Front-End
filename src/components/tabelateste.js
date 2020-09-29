@@ -55,9 +55,9 @@ class ListCostumer extends Component {
 
         return (
             <ThemeProvider theme={theme}>
-            <div>
-                <div className="App">
-                    <h2 className="App-intro">
+            <div className='App'>
+                <div>
+                    <h2>
                         <Link to="/">Ir para a página Home</Link>
                     </h2>
                 </div>

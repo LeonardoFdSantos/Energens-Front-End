@@ -56,12 +56,12 @@ class irradiations extends Component {
 
         return (
             <ThemeProvider theme={theme}>
-            <div>
-                <div className="App">
-                    <p className="App-intro">
-                        <Link to="/">Ir para a página Home</Link>
-                    </p>
-                </div>
+                <div className='App'>
+                    <div>
+                        <h2 align='center'>
+                            <Link to="/">Ir para a página Home</Link>
+                        </h2>
+                    </div>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="Lista de inversores">
                         <TableHead>

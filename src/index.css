@@ -1,0 +1,12 @@
+html{
+    background: #303030 repeat right top fixed;
+}
+.App{
+    margin: 1em;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+a{
+    color: red;
+}

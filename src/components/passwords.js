@@ -55,47 +55,47 @@ class password extends Component {
 
         return (
             <ThemeProvider theme={theme}>
-            <div>
-                <div className="App">
-                    <p className="App-intro">
-                        <Link to="/">Ir para a página Home</Link>
-                    </p>
+                <div className='App'>
+                    <div>
+                        <h2>
+                            <Link to="/">Ir para a página Home</Link>
+                        </h2>
                 </div>
-                <TableContainer component={Paper}>
-                    <Table className={classes.table} aria-label="Lista de senhas Internet">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>id</TableCell>
-                                <TableCell align="left">customer</TableCell>
-                                <TableCell align="right">portal</TableCell>
-                                <TableCell align="right">user</TableCell>
-                                <TableCell align="right">password</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {passwords.slice(page * itensPage, page * itensPage + itensPage).map((row) => (
-                                <TableRow key={row.id}>
-                                    <TableCell> {row.id} </TableCell>
-                                    <TableCell component="th" scope="row">
-                                        {row.customer}
-                                    </TableCell>
-                                    <TableCell align="right">{row.portal}</TableCell>
-                                    <TableCell align="right">{row.user}</TableCell>
-                                    <TableCell align="right">{row.password}</TableCell>
+                    <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="Lista de senhas Internet">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>id</TableCell>
+                                    <TableCell align="left">customer</TableCell>
+                                    <TableCell align="right">portal</TableCell>
+                                    <TableCell align="right">user</TableCell>
+                                    <TableCell align="right">password</TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[10, 15, 20, 25, 50,100]}
-                    component="div"
-                    count={passwords.length}
-                    rowsPerPage={itensPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                />
+                            </TableHead>
+                            <TableBody>
+                                {passwords.slice(page * itensPage, page * itensPage + itensPage).map((row) => (
+                                    <TableRow key={row.id}>
+                                        <TableCell> {row.id} </TableCell>
+                                        <TableCell component="th" scope="row">
+                                            {row.customer}
+                                        </TableCell>
+                                        <TableCell align="right">{row.portal}</TableCell>
+                                        <TableCell align="right">{row.user}</TableCell>
+                                        <TableCell align="right">{row.password}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[10, 15, 20, 25, 50,100]}
+                        component="div"
+                        count={passwords.length}
+                        rowsPerPage={itensPage}
+                        page={page}
+                        onChangePage={handleChangePage}
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                    />
             </div>
             </ThemeProvider>
         );
