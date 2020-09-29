@@ -11,21 +11,25 @@ import internet from "./components/internet";
 import inverter from "./components/inverters"
 import irradiation from "./components/irradiation";
 import predicted from "./components/predicted";
+import tabelateste from "./components/tabelateste";
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+
+
 
 ReactDOM.render(
     <BrowserRouter>
-        <Switch>
-            <Route path="/" exact={true} component={App} />
-            <Route path="/consolidated" component={consolidated} />
-            <Route path="/cleaning" component={cleanings} />
-            <Route path="/password" component={passwords} />
-            <Route path="/customer" component={customers} />
-            <Route path="/internet" component={internet} />
-            <Route path="/inverter" component={inverter} />
-            <Route path="/irradiation" component={irradiation} />
-            <Route path="/predicted" component={predicted} />
-        </Switch>
+            <Switch>
+                <Route path="/" exact={true} component={App} />
+                <Route path="/consolidated" component={consolidated} />
+                <Route path="/cleaning" component={cleanings} />
+                <Route path="/password" component={passwords} />
+                <Route path="/customer" component={customers} />
+                <Route path="/internet" component={internet} />
+                <Route path="/inverter" component={inverter} />
+                <Route path="/irradiation" component={irradiation} />
+                <Route path="/predicted" component={predicted} />
+                <Route path="/tabelateste" component={tabelateste} />
+            </Switch>
     </ BrowserRouter>,
   document.getElementById('root')
 );

@@ -13,19 +13,19 @@ import TablePagination from '@material-ui/core/TablePagination';
 
 
 
-class cleanings extends Component {
+class ListCostumer extends Component {
     constructor() {
         super();
         this.state = {
-            cleanings: [],
+            consolidated: [],
             itensPage: [],
             page: [],
         }
     }
 
     async componentDidMount() {
-        const response = await api.get('cleaning');
-        this.setState({ cleanings: response.data.Cleanings });
+        const response = await api.get('consolidated');
+        this.setState({ consolidated: response.data.Consolidated });
         this.setState({page: 0})
         this.setState({itensPage: 10})
     }
@@ -37,8 +37,7 @@ class cleanings extends Component {
                 type: 'dark',
             },
         });
-
-        const { cleanings, page, itensPage } = this.state
+        const { consolidated, page, itensPage } = this.state
         const classes = makeStyles({
             table: {
                 minWidth: 650,
@@ -58,9 +57,9 @@ class cleanings extends Component {
             <ThemeProvider theme={theme}>
             <div>
                 <div className="App">
-                    <p className="App-intro">
+                    <h2 className="App-intro">
                         <Link to="/">Ir para a página Home</Link>
-                    </p>
+                    </h2>
                 </div>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="Lista de Clientes">
@@ -68,21 +67,29 @@ class cleanings extends Component {
                             <TableRow>
                                 <TableCell>id</TableCell>
                                 <TableCell align="left">customer</TableCell>
-                                <TableCell align="right">date</TableCell>
-                                <TableCell align="right">nextDate</TableCell>
-                                <TableCell align="right">maximumTime</TableCell>
+                                <TableCell align="right">projectNumber</TableCell>
+                                <TableCell align="right">modulesNumber</TableCell>
+                                <TableCell align="right">modulesPower</TableCell>
+                                <TableCell align="right">powerTotal</TableCell>
+                                <TableCell align="right">effectiveness</TableCell>
+                                <TableCell align="right">delivered</TableCell>
+                                <TableCell align="right">local</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {cleanings.slice(page * itensPage, page * itensPage + itensPage).map((row) => (
+                            {consolidated.slice(page * itensPage, page * itensPage + itensPage).map((row) => (
                                 <TableRow key={row.id}>
                                     <TableCell> {row.id} </TableCell>
                                     <TableCell component="th" scope="row">
                                         {row.customer}
                                     </TableCell>
-                                    <TableCell align="right">{row.date}</TableCell>
-                                    <TableCell align="right">{row.nextDate}</TableCell>
-                                    <TableCell align="right">{row.maximumTime}</TableCell>
+                                    <TableCell align="right">{row.projectNumber}</TableCell>
+                                    <TableCell align="right">{row.modulesNumber}</TableCell>
+                                    <TableCell align="right">{row.modulesPower}</TableCell>
+                                    <TableCell align="right">{row.powerTotal}</TableCell>
+                                    <TableCell align="right">{row.effectiveness}</TableCell>
+                                    <TableCell align="right">{row.delivered}</TableCell>
+                                    <TableCell align="right">{row.local}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -91,7 +98,7 @@ class cleanings extends Component {
                 <TablePagination
                     rowsPerPageOptions={[10, 15, 20, 25, 50,100]}
                     component="div"
-                    count={cleanings.length}
+                    count={consolidated.length}
                     rowsPerPage={itensPage}
                     page={page}
                     onChangePage={handleChangePage}
@@ -103,4 +110,4 @@ class cleanings extends Component {
     }
 }
 
-export default cleanings;
+export default ListCostumer;

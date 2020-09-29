@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from "../services/api";
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import {createMuiTheme, makeStyles, ThemeProvider} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,30 +9,53 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TablePagination from "@material-ui/core/TablePagination";
+
 
 
 
 class ListCostumer extends Component {
-
-    state = {
-        consolidated: [],
+    constructor() {
+        super();
+        this.state = {
+            consolidated: [],
+            itensPage: [],
+            page: [],
+        }
     }
 
     async componentDidMount() {
         const response = await api.get('consolidated');
         this.setState({ consolidated: response.data.Consolidated });
+        this.setState({page: 0})
+        this.setState({itensPage: 10})
     }
 
 
     render(){
-            const { consolidated } = this.state
-            const classes = makeStyles({
-                table: {
-                    minWidth: 650,
-                },
-            });
+        const theme = createMuiTheme({
+            palette: {
+                type: 'dark',
+            },
+        });
+        const { consolidated, page, itensPage } = this.state
+        const classes = makeStyles({
+            table: {
+                minWidth: 650,
+            },
+        });
+
+        const handleChangePage = (event, newPage) => {
+            this.setState({ page: newPage});
+        };
+
+        const handleChangeRowsPerPage = (event) => {
+            this.setState({ itensPage: +event.target.value});
+            this.setState({page: 0})
+        };
 
             return (
+                <ThemeProvider theme={theme}>
                 <div>
                     <div className="App">
                         <p className="App-intro">
@@ -55,7 +78,7 @@ class ListCostumer extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {consolidated.map((row) => (
+                                {consolidated.slice(page * itensPage, page * itensPage + itensPage).map((row) => (
                                     <TableRow key={row.id}>
                                         <TableCell> {row.id} </TableCell>
                                         <TableCell component="th" scope="row">
@@ -73,7 +96,17 @@ class ListCostumer extends Component {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[10, 15, 20, 25, 50,100]}
+                        component="div"
+                        count={consolidated.length}
+                        rowsPerPage={itensPage}
+                        page={page}
+                        onChangePage={handleChangePage}
+                        onChangeRowsPerPage={handleChangeRowsPerPage}
+                    />
                 </div>
+                </ThemeProvider>
             );
         }
 }
